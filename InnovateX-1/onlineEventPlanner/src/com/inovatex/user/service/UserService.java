@@ -1,0 +1,17 @@
+package com.inovatex.user.service;
+
+import java.util.List;
+
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+
+public interface UserService {
+	int addUser (User user) throws UserAlreadyExistsException;
+	int changePassword(String username,String password) throws UserNotFoundExceptions;
+	int changeStatus(String username, String status) throws UserNotFoundExceptions;
+	int deleteUser (String username)throws UserNotFoundExceptions;
+	User getUserByUsername(String username)throws UserNotFoundExceptions;
+	List<User> allUser()throws UserNotFoundExceptions;
+	
+}
