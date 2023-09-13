@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendors Details</title>
+    <style>
+        
+        body, h1, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        
+        body {
+            font-family: Times New Roman, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #a1d9b8; 
+            color: white;
+            padding: 20px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            border-radius: 0 0 20px 20px; 
+            font-style: italic; 
+        }
+
+        
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #a1d9b8; 
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+       
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1><i>Vendor Details</i></h1>
+    <table id="vendorTable">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Contact</th>
+        </tr>
+        <!-- Dummy data -->
+        <tr>
+            <td>Vendor 1</td>
+            <td>Lavelle road, Bangalore</td>
+            <td>vendor1@example.com</td>
+            <td>9134567890</td>
+        </tr>
+        <tr>
+            <td>Vendor 2</td>
+            <td>Bandra, Mumbai</td>
+            <td>vendor2@example.com</td>
+            <td>9876543210</td>
+        </tr>
+        <tr>
+            <td>Vendor 3</td>
+            <td>Madhapur, Hyderabad</td>
+            <td>vendor3@example.com</td>
+            <td>8567891230</td>
+        </tr>
+        <tr>
+            <td>Vendor 4</td>
+            <td>Sarojini, Delhi</td>
+            <td>vendor4@example.com</td>
+            <td>7891234560</td>
+        </tr>
+        <tr>
+            <td>Vendor 5</td>
+            <td>Yerwada, Pune</td>
+            <td>vendor5@example.com</td>
+            <td>3216549870</td>
+        </tr>
+    </table>
+</body>
+</html>

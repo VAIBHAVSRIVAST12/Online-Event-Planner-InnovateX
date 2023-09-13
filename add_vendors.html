@@ -1,0 +1,132 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Vendors</title>
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+
+    #userinterface {
+        border: 1px solid #ccc;
+        padding: 20px;
+        background-color: #f2f9f4; 
+    }
+
+    #registrationForm {
+        border: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #d2e5d8; 
+    }
+
+    button {
+        background-color: #0074d9;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    
+    #address {
+        height: 100px;
+        width: 300px;
+    }
+
+    
+    #successMessage {
+        color: green;
+    }
+</style>
+</head>
+<body>
+    <div id="userinterface">
+        <h1><i>Add Vendors</i></h1>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <table>
+                <!-- Form fields here -->
+                <tr>
+                    <th>Vendor Details</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td><label for="username">Vendor Name:</label></td>
+                    <td><input type="text" id="username" name="username" required pattern="[a-zA-Z]+"></td>
+                </tr>
+                <tr>
+                    <td><label for="address">Address:</label></td>
+                    <td><textarea id="address" name="address" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="contactno">Contact no:</label></td>
+                    <td><input type="tel" id="contactno" name="contactno" required pattern="[0-9]+"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+            </table>
+
+            <br>
+
+            <button type="submit">Submit</button>
+            <button type="button" onclick="resetForm()">Reset</button>
+
+            <!-- Success message -->
+            <p id="successMessage" style="display: none;"></p>
+        </form>
+    </div>
+
+    <script>
+        // Add an event listener to the form's submit event
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from actually submitting
+
+            var username = document.getElementById("username").value;
+            var address = document.getElementById("address").value;
+            var contactno = document.getElementById("contactno").value;
+            var email = document.getElementById("email").value;
+
+            if (username === "" || address === "" || contactno === "" || email === "") {
+                alert("Please fill in all the required fields.");
+            } else {
+                alert("Vendor has been added successfully");
+                resetForm(); // Optionally, reset the form after showing the success message
+            }
+        });
+
+        function resetForm() {
+            document.getElementById("registrationForm").reset();
+        }
+    </script>
+
+</body>
+
+</html>

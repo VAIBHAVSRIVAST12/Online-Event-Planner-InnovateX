@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>User Information</title>
+	<style>
+        
+        body, h1, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+       
+        body {
+            font-family: Times New Roman, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #a1d9b8; 
+            color: white;
+            padding: 20px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            border-radius: 0 0 20px 20px; 
+            font-style: italic; 
+        }
+
+        
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #a1d9b8;
+            color: white;
+        }
+
+	th {
+    	     background-clip: padding-box;
+	}
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1><i>User Registration Details</i></h1>
+    <table id="userTable" class="table">
+        <thead>
+            <tr>
+            <th>FullName</th>
+            <th>UserPassword</th>
+            <th>Date Of Joining</th>
+            <th>Date Of Birth</th>
+            <th>Mobile</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script src="view_users.js"></script>
+</body>
+</html>
