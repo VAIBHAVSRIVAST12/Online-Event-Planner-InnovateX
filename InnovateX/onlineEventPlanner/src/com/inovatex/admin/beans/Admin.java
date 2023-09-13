@@ -1,0 +1,68 @@
+package com.inovatex.admin.beans;
+
+import java.util.Objects;
+
+public class Admin {
+	private int adminId;
+	private String adminUsername;
+	private String adminFullname;
+	private String adminPassword;
+	private String adminEmail;
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(adminEmail, adminFullname, adminId, adminMobile, adminPassword, adminUsername);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Admin other = (Admin) obj;
+		return Objects.equals(adminEmail, other.adminEmail) && Objects.equals(adminFullname, other.adminFullname)
+				&& adminId == other.adminId && Objects.equals(adminMobile, other.adminMobile)
+				&& Objects.equals(adminPassword, other.adminPassword)
+				&& Objects.equals(adminUsername, other.adminUsername);
+	}
+	public int getAdminId() {
+		return adminId;
+	}
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
+	public String getAdminUsername() {
+		return adminUsername;
+	}
+	public void setAdminUsername(String adminUsername) {
+		this.adminUsername = adminUsername;
+	}
+	public String getAdminFullname() {
+		return adminFullname;
+	}
+	public void setAdminFullname(String adminFullname) {
+		this.adminFullname = adminFullname;
+	}
+	public String getAdminPassword() {
+		return adminPassword;
+	}
+	public void setAdminPassword(String adminPassword) {
+		this.adminPassword = adminPassword;
+	}
+	public String getAdminEmail() {
+		return adminEmail;
+	}
+	public void setAdminEmail(String adminEmail) {
+		this.adminEmail = adminEmail;
+	}
+	public String getAdminMobile() {
+		return adminMobile;
+	}
+	public void setAdminMobile(String adminMobile) {
+		this.adminMobile = adminMobile;
+	}
+	private String adminMobile;
+
+}
