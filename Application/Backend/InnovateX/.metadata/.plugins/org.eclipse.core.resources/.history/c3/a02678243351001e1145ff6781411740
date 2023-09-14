@@ -1,0 +1,9 @@
+package com.inovatex.vendor.exceptions;
+
+@SuppressWarnings("serial")
+public class PlanRequestNotFoundExceptions extends Exception{
+	public PlanRequestNotFoundExceptions() {
+		super("Package not found..");
+	}
+
+}

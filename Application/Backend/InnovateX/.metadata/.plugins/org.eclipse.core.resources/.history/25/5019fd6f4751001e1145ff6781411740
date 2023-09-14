@@ -1,0 +1,47 @@
+package com.inovatex.vendor.beans;
+
+import java.util.Objects;
+
+public class ServiceList {
+	private int ServiceID;
+	private String Service;
+	private double Amount;
+	public int getServiceID() {
+		return ServiceID;
+	}
+	public void setServiceID(int serviceID) {
+		ServiceID = serviceID;
+	}
+	public String getService() {
+		return Service;
+	}
+	public void setService(String service) {
+		Service = service;
+	}
+	public double getAmount() {
+		return Amount;
+	}
+	public void setAmount(double amount) {
+		Amount = amount;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(Amount, Service, ServiceID);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ServiceList other = (ServiceList) obj;
+		return Double.doubleToLongBits(Amount) == Double.doubleToLongBits(other.Amount)
+				&& Objects.equals(Service, other.Service) && ServiceID == other.ServiceID;
+	}
+	public ServiceList() {
+		
+	}
+	
+}

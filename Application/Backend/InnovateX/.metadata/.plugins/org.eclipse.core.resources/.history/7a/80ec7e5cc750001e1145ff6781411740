@@ -1,0 +1,14 @@
+package com.inovatex.vendor.beans;
+
+public class Snippet {
+	System.out.println("Enter the username :");
+					String username =sc.next();
+					try {
+						User user= userService.getUserByUsername(username);
+						System.out.println(user);
+					} catch (UserNotFoundExceptions e) {
+						System.err.println(e.getMessage());
+						
+					}
+}
+

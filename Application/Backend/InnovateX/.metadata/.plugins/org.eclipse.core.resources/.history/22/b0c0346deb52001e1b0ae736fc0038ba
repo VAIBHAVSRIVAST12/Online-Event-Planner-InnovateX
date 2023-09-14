@@ -1,0 +1,16 @@
+package com.inovatex.utils;
+
+
+public class InovateDaoFactoryPattern {
+	EmployeeDao dao;
+	public EmployeeDao getDaoImpl(String impl) {
+		switch(impl) {
+		case "database":
+			dao = new EmployeeDaoImplDB();break;
+		case "collection":
+			dao = new EmployeeDaoImpl();break;
+		}
+		return dao;
+	}
+
+}

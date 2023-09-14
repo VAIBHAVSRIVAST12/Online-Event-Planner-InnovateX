@@ -1,0 +1,77 @@
+package com.inovatex.user.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.inovatex.user.beans.User;
+import com.inovatex.user.dao.UserDao;
+import com.inovatex.user.dao.UserDaoImpl;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.user.exceptions.UserWrongPasswordException;
+
+public class UserServiceImpl implements UserService{
+	UserDao userDao = new UserDaoImpl();
+	@Override
+	public int addUser(User user) throws UserAlreadyExistsException {
+		
+		return userDao.addUser(user);
+	}
+	@Override
+	public int changePassword(String username, String password) throws UserNotFoundExceptions {
+		
+		return userDao.changePassword(username, password);
+	}
+	@Override
+	public int changeStatus(String username, String status) throws UserNotFoundExceptions {
+		
+		return userDao.changeStatus(username, status);
+	}
+	@Override
+	public int deleteUser(String username) throws UserNotFoundExceptions {
+		
+		return userDao.deleteUser(username);
+	}
+	@Override
+	public User getUserByUsername(String username) throws UserNotFoundExceptions {
+		
+		return userDao.getUserByUsername(username);
+	}
+	@Override
+	public List<User> allUser() throws UserNotFoundExceptions {
+		
+		return userDao.allUser();
+	}
+	@Override
+	public boolean validateUser(String username, String userPassword) throws UserNotFoundExceptions, UserWrongPasswordException {
+		try {
+			User user = getUserByUsername(username);
+			if(user.getUserPassword().equals(userPassword)) {
+				return true;
+			}
+			else {
+				throw new UserWrongPasswordException();
+			}
+		} catch (UserNotFoundExceptions e) {
+			throw new UserNotFoundExceptions();
+		}
+
+	}
+	@Override
+	public HashMap<String, String> viewProfile(String username) throws UserNotFoundExceptions {
+		User user = getUserByUsername(username);
+		HashMap<String, String> userProfile = new HashMap<>();
+		userProfile.put("userFullname",user.getUserFullName());
+		userProfile.put("username",user.getUsername());
+		userProfile.put("userDateOfJoining",user.getUserDateOfJoining().toString());
+		userProfile.put("userDateOfBirth",user.getUserDateOfJoining().toString());
+		userProfile.put("userDepartment",user.getUserDepartment());
+		userProfile.put("userMobile",user.getUserMobile());
+		userProfile.put("userEmail",user.getUserEmail());
+		userProfile.put("userLocation",user.getUserLocation());
+		userProfile.put("userStatus",user.getUserStatus());
+		return userProfile;
+	}
+
+
+}

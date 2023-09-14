@@ -1,0 +1,23 @@
+package com.inovatex.planrequest.service;
+
+import java.util.List;
+
+import com.inovatex.planrequest.beans.PlanRequest;
+import com.inovatex.planrequest.exceptions.PlanRequestNotFoundExceptions;
+
+public interface PlanRequestService {
+	int addPlanRequest(PlanRequest planRequest, int userId);
+	int deletePlanRequest (int requestId)throws PlanRequestNotFoundExceptions;
+	List<PlanRequest> allRequest()throws PlanRequestNotFoundExceptions;
+}
+//int rows=0;String insertsql = "INSERT INTO planrequest ( UserID,RequestFromDate, RequestToDate, RequestServices, RequestNumberOfPersons, requestOtherService) SELECT u.UserID, ?,?,?,?,? FROM User u WHERE u.username = ?";
+//try {
+//	preparedStatement = conn.prepareStatement(insertsql);
+//	preparedStatement.setString(1, planRequest.getRequestFromDate().toString());
+//    preparedStatement.setString(2, planRequest.getRequestToDate().toString());
+//    preparedStatement.setString(3, planRequest.getRequestServicesNeeded()); 
+//    preparedStatement.setInt(4, planRequest.getRequestNumberOfPersons());  
+//    preparedStatement.setString(5, planRequest.getRequestOtherServices());
+//    preparedStatement.setString(6,"karan2001");
+//	rows = preparedStatement.executeUpdate();
+//} 

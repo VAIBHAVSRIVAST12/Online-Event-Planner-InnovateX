@@ -1,0 +1,10 @@
+package com.inovatex.user.ui;
+
+public class UIApplication {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

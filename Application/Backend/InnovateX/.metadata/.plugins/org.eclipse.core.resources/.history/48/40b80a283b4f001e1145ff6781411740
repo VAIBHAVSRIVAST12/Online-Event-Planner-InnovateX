@@ -1,0 +1,20 @@
+package com.inovatex.planrequest.dao;
+
+import com.inovatex.planrequest.beans.PlanRequest;
+import com.inovatex.planrequest.exceptions.PlanRequestNotFoundExceptions;
+
+public class PlanRequestDaoImpl implements PlanRequestDao {
+
+	@Override
+	public int addPlanRequest(PlanRequest planRequest) {
+		
+		return 0;
+	}
+
+	@Override
+	public int deletePlanRequest(String requestId) throws PlanRequestNotFoundExceptions {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.inovatex.vendor.service;
+
+public interface VendorService {
+
+}

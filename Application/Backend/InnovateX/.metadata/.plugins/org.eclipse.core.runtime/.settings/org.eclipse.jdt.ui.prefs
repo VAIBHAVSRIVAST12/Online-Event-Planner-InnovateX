@@ -1,0 +1,10 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.inovatex.user.service.UserService"><rhs name\="com.inovatex.user.service.UserServiceImpl"/></lhs><lhs name\="com.inovatex.user.dao.UserDao"><rhs name\="com.inovatex.user.dao.UserDaoImpl"/></lhs><lhs name\="com.inovatex.planrequest.dao.PlanRequestDao"><rhs name\="com.inovatex.planrequest.dao.PlanRequestDaoImpl"/></lhs><lhs name\="com.inovatex.planrequest.beans.PlanRequest"><rhs name\="com.inovatex.planrequest.beans.PlanRequest"/></lhs><lhs name\="com.inovatex.admin.dao.AdminDao"><rhs name\="com.inovatex.admin.dao.AdminDaoImpl"/></lhs><lhs name\="com.inovatex.admin.service.AdminService"><rhs name\="com.inovatex.admin.service.AdminServiceImpl"/></lhs><lhs name\="com.inovatex.vendor.dao.VendorDao"><rhs name\="com.inovatex.vendor.dao.VendorDaoImpl"/></lhs><lhs name\="com.inovatex.vendor.service.VendorService"><rhs name\="com.inovatex.vendor.service.VendorServiceImpl"/></lhs><lhs name\="com.inovatex.vendor.beans.Quotation"><rhs name\="com.inovatex.vendor.beans.Quotation"/></lhs></history>
+content_assist_number_of_computers=15
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+org.eclipse.jdt.ui.formatterprofiles.version=23
+spelling_locale_initialized=true
+typefilter_migrated_2=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

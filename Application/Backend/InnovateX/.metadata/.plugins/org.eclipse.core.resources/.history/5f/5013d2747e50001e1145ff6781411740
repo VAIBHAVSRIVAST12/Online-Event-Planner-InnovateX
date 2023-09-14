@@ -1,0 +1,12 @@
+package com.inovatex.admin.dao;
+
+import java.util.List;
+
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+public interface AdminDao {
+		Admin getAdminByAdminUsername(String adminUser) throws AdminNotFoundExceptions ;
+
+
+}

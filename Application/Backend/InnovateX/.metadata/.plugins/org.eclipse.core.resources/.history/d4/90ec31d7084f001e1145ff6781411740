@@ -1,0 +1,7 @@
+package com.inovatex.user.utils;
+
+import java.sql.Connection;
+
+public class DBConnection {
+	private static Connection conn = null;
+}

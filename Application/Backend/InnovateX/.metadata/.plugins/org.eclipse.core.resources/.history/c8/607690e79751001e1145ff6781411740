@@ -1,0 +1,47 @@
+package com.inovatex.vendor.beans;
+
+public class Quotation {
+	private int QuotationID;
+	private String QuotationPackageType;
+	private double QuotationEstimatedAmount;
+	private int VendorID;
+    private static int UserID;
+    private int PlanRequestID;
+	public int getQuotationID() {
+		return QuotationID;
+	}
+	public void setQuotationID(int quotationID) {
+		QuotationID = quotationID;
+	}
+	public String getQuotationPackageType() {
+		return QuotationPackageType;
+	}
+	public void setQuotationPackageType(String quotationPackageType) {
+		QuotationPackageType = quotationPackageType;
+	}
+	public double getQuotationEstimatedAmount() {
+		return QuotationEstimatedAmount;
+	}
+	public void setQuotationEstimatedAmount(double quotationEstimatedAmount) {
+		QuotationEstimatedAmount = quotationEstimatedAmount;
+	}
+	public int getVendorID() {
+		return VendorID;
+	}
+	public void setVendorID(int vendorID) {
+		VendorID = vendorID;
+	}
+	public int getUserID() {
+		return UserID;
+	}
+	public void setUserID(int userID) {
+		UserID = userID;
+	}
+	public int getPlanRequestID() {
+		return PlanRequestID;
+	}
+	public void setPlanRequestID(int PlanRequestID) {
+		this.PlanRequestID = PlanRequestID;
+	}
+
+}

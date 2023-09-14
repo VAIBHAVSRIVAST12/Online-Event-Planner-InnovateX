@@ -1,0 +1,5 @@
+package com.inovatex.user.exceptions;
+
+public class UserWrongPasswordException {
+
+}

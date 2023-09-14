@@ -1,0 +1,42 @@
+package com.inovatex.user.dao;
+
+
+import java.util.List;
+
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+
+public class UserDaoImpl implements UserDao {
+	
+	@Override
+	public int addUser(User user) throws UserAlreadyExistsException {
+		
+		return 0;
+	}
+
+	@Override
+	public int updateUser(User user) throws UserNotFoundExceptions {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteUser(String username) throws UserNotFoundExceptions {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> allUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

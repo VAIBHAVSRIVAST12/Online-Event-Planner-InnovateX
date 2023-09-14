@@ -1,0 +1,45 @@
+package com.inovatex.vendor.service;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.AdminWrongPasswordException;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.vendor.beans.Packages;
+import com.inovatex.vendor.dao.VendorDao;
+import com.inovatex.vendor.dao.VendorDaoImpl;
+import com.inovatex.vendor.exceptions.PackageAlreadyExistsException;
+import com.inovatex.vendor.exceptions.VendorWrongPasswordException;
+
+public class VendorServiceImpl implements VendorService{
+	VendorDao vendorDao = new VendorDaoImpl();
+	@Override
+	public Vendor getVendorByVendorId(int vendorID) throws VendorNotFoundException {
+		
+		return vendorDao.getVendorByVendorId(vendorID);
+	}
+
+	@Override
+	public boolean validateVendor(int vendorId, String vendorPassword)
+			throws VendorNotFoundException, VendorWrongPasswordException {
+		try {
+			Vendor vendor = getVendorByVendorId(vendorId);
+			if(vendor.getVendorPassword().equals(vendorPassword)) {
+				return true;
+			}
+			else {
+				throw new VendorWrongPasswordException();
+			}
+		} catch (VendorNotFoundException e) {
+			throw new VendorNotFoundException();
+		}
+
+	}
+
+	@Override
+	public int addPackage(Packages packages) throws PackageAlreadyExistsException {
+		
+		return vendorDao.addPackage(packages);
+	}
+
+}

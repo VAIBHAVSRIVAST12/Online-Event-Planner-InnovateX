@@ -1,0 +1,52 @@
+package com.inovatex.planrequest.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
+
+import com.inovatex.planrequest.beans.PlanRequest;
+import com.inovatex.planrequest.exceptions.PlanRequestNotFoundExceptions;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.utils.DBConnections;
+
+public class PlanRequestDaoImpl implements PlanRequestDao {
+	Connection conn;
+	PreparedStatement preparedStatement;
+	ResultSet resultSet;
+	@Override
+	public int addPlanRequest(PlanRequest planRequest, int userId) {
+		conn = DBConnections.getConnection();
+		int rows=0;String insertsql = "INSERT INTO planrequest ( RequestFromDate, RequestToDate, RequestServices, RequestNumberOfPersons, UserID, requestOtherService) VALUES (?, ?, ?, ?, ?, ?)";
+		try {
+			preparedStatement = conn.prepareStatement(insertsql);
+			preparedStatement.setString(1, planRequest.getRequestFromDate().toString());
+            preparedStatement.setString(2, planRequest.getRequestToDate().toString());
+            preparedStatement.setString(3, planRequest.getRequestServicesNeeded()); 
+            preparedStatement.setInt(4, planRequest.getRequestNumberOfPersons()); 
+            preparedStatement.setInt(5, planRequest.getUserId()); 
+            preparedStatement.setString(6, planRequest.getRequestOtherServices());
+            
+			rows = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+        	e.printStackTrace();
+        }
+		DBConnections.close();
+		return rows;
+	}
+
+	@Override
+	public int deletePlanRequest(String requestId) throws PlanRequestNotFoundExceptions {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<PlanRequest> allRequest() throws PlanRequestNotFoundExceptions {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

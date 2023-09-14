@@ -1,0 +1,13 @@
+package com.inovatex.vendor.service;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.AdminWrongPasswordException;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.vendor.exceptions.VendorWrongPasswordException;
+
+public interface VendorService {
+	Vendor getVendorByVendorId(int vendorID)throws VendorNotFoundException;
+	boolean validateVendor(int vendorId,String vendorPassword) throws VendorNotFoundException, VendorWrongPasswordException;
+}

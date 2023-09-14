@@ -1,0 +1,13 @@
+package com.inovatex.planrequest.beans;
+
+import java.time.LocalDate;
+
+public class PlanRequest {
+	private int requestId;
+    private LocalDate requestFromDate;
+    private LocalDate requestToDate;
+    private String requestServicesNeeded;
+    private int requestNumberOfPersons;
+    private String requestOtherServices;
+    private int userId;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Quotation</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+	
+	button {
+    background-color: #0074d9;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label, input, select {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Quotation</h1>
+        <form id="create_quotation" action="vendorUser_request.html">
+            <label for="unique_id">Unique ID:</label>
+            <input type="text" id="unique_id" name="unique_id" size="30" maxlength="100" required>
+            
+            <label for="package">Package:</label>
+            <select id="package" name="package">
+                <option value="basic">Basic</option>
+                <option value="premium">Premium</option>
+                <option value="classic">Classic</option>
+            </select>
+
+            <label for="estimated_amount">Estimated Amount:</label>
+            <input type="text" id="estimated_amount" name="estimated_amount" required pattern="[0-9]+" required>
+
+            <label for="vendor_id">Vendor ID:</label>
+            <input type="text" id="vendor_id" name="vendor_id" required>
+            
+            <label for="plan_request_id">Plan Request ID:</label>
+            <input type="text" id="plan_request_id" name="plan_request_id" required>
+
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status" required>
+
+            <div class="form-group">
+                <button id="alertButton">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript code to auto-fill input values
+        document.addEventListener('DOMContentLoaded', function () {
+            const unique_idInput = document.getElementById('unique_id');
+            const vendor_idInput = document.getElementById('vendor_id');
+            const plan_request_idInput = document.getElementById('plan_request_id');
+            const statusInput = document.getElementById('status');
+
+            const predefinedunique_id = '101';
+            const predefinedvendor_id = 'v_11';
+            const predefinedplan_request_id = 'plan-111';
+            const predefinedstatus = 'Pending....';
+
+            unique_idInput.value = predefinedunique_id;
+            vendor_idInput.value = predefinedvendor_id;
+            plan_request_idInput.value = predefinedplan_request_id;
+            statusInput.value = predefinedstatus;
+        });
+
+        // Add an event listener to the form's submit event
+     /*   document.getElementById("create_quotation").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from actually submitting
+
+            var estimated_amount = document.getElementById("estimated_amount").value;
+
+            if (estimated_amount === "") {
+                alert("Please fill in all the required fields.");
+            } 
+              
+            
+        });*/
+    </script>
+</body>
+</html>
+

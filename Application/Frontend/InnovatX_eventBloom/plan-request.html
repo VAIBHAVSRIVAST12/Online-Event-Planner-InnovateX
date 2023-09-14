@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/userPage.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <title>Send Plan Request</title>
+</head>
+
+<body class="plan-request-body">
+
+
+  <div class="plan-form">
+    <form action="UserHomepage.html">
+      <div class="form-row">
+
+        <div class=" event-type form-group col-md-9">
+
+  <h1 class="plan-request-input">Enter your Plan Details:</h3>
+          <label for="eventType">Choose the type of event:</label>
+          <select id="eventType" name="eventType">
+            <option value="wedding">Wedding</option>
+            <option value="birthday">Birthday</option>
+            <option value="others">Others</option>
+          </select>
+
+
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="from-date">From Date: </label>
+          <input type="date" class="form-control" id="from-date" placeholder="dd-mm-yyyy" required>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="to-date">To Date: </label>
+          <input type="date" class="form-control" id="to-date" placeholder="dd-mm-yyyy" required>
+        </div>
+
+        <div class="Table  col-md-6">
+          <table>
+            <thead>
+              <tr>
+                <th>Pick the services required</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <label for="service1" id="service-label"> Photography </label>
+                </td>
+                <td>
+                  <input type="checkbox" id="service1" name="service1" value="Service 1">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="service2" id="service-label">Decoration</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="service2" name="service2" value="Service 2" >
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                    <label for="service3" id="service-label">Catering</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="service3" name="service3" value="Service 3">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="numfPersons col-md-6">
+          <label for="noOfPersons">Total number of Persons: </label>
+          <input type="number" id="noOfPersons" name="noOfPersons" min="30" required>
+           <span id="validationMessage" class="validation-message"></span>
+        </div>
+
+        <div class="otherServices col-md-12">
+          <label for="otherServices">Other Services that you would like to avail: </label>
+          <input type="text" id="otherServices" name="otherServices">
+        </div>
+
+        <div class="send-request-btn">
+          <span id="validationMessage" class="validation-message"></span>
+  <div id="successMessage" class="success-message"></div>
+          <button type="submit" class="btn btn-outline-secondary" onclick="pop()" > Send Plan Request </button>
+        </div>
+
+    </form>
+  </div>
+
+  <script>
+      function pop() {
+          alert('Plan Request Sent Successfully!!!!');
+      }
+  </script>
+  <script src="login.js"></script>
+</body>
+
+</html>

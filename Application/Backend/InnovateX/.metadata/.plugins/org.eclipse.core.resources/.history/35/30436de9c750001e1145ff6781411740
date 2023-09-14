@@ -1,0 +1,45 @@
+package com.event.beans;
+
+public class Packages {
+	private int PackageID;
+	private static int ServiceID;
+	private String TypeOfEvent;
+	private String PackageType;
+	private int VendorID;
+
+	public int getPackageID() {
+        return PackageID;
+    }
+    public void setPackageID(int packageID) {
+        PackageID = packageID;
+    }
+    public String getTypeOfEvent() {
+        return TypeOfEvent;
+    }
+    public void setTypeOfEvent(String typeOfEvent) {
+        TypeOfEvent = typeOfEvent;
+    }
+    public String getPackageType() {
+        return PackageType;
+    }
+    public void setPackageType(String packageType) {
+        PackageType = packageType;
+    }
+    public int getVendorID() {
+        return VendorID;
+    }
+    public void setVendorID(int vendorID) {
+        VendorID = vendorID;
+    }
+    public static int getServiceID() {
+		return ServiceID;
+	}
+	public void setServiceID(int serviceID) {
+		ServiceID = serviceID;
+	}
+    
+
+}
+
+
+

@@ -1,0 +1,73 @@
+package com.inovatex.admin.beans;
+
+import java.util.Objects;
+
+public class Vendor {
+	private int vendorId;
+	private String vendorName;
+	private String vendorAddress;
+	private String vendorEmail;
+	private String vendorPassword;
+	private String vendorContactNumbers;
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(vendorAddress, vendorContactNumbers, vendorEmail, vendorId, vendorName, vendorPassword);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vendor other = (Vendor) obj;
+		return Objects.equals(vendorAddress, other.vendorAddress)
+				&& Objects.equals(vendorContactNumbers, other.vendorContactNumbers)
+				&& Objects.equals(vendorEmail, other.vendorEmail) && vendorId == other.vendorId
+				&& Objects.equals(vendorName, other.vendorName) && Objects.equals(vendorPassword, other.vendorPassword);
+	}
+	public String getVendorPassword() {
+		return vendorPassword;
+	}
+	public void setVendorPassword(String vendorPassword) {
+		this.vendorPassword = vendorPassword;
+	}
+	public int getVendorId() {
+		return vendorId;
+	}
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
+	}
+	public String getVendorName() {
+		return vendorName;
+	}
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
+	public String getVendorAddress() {
+		return vendorAddress;
+	}
+	public void setVendorAddress(String vendorAddress) {
+		this.vendorAddress = vendorAddress;
+	}
+	public String getVendorEmail() {
+		return vendorEmail;
+	}
+	public void setVendorEmail(String vendorEmail) {
+		this.vendorEmail = vendorEmail;
+	}
+	public String getVendorContactnumbers() {
+		return vendorContactNumbers;
+	}
+	public void setVendorContactnumbers(String vendorContactnumbers) {
+		this.vendorContactNumbers = vendorContactnumbers;
+	}
+	@Override
+	public String toString() {
+		return "Vendor [vendorId=" + vendorId + ", vendorName=" + vendorName + ", vendorAddress=" + vendorAddress
+				+ ", vendorEmail=" + vendorEmail + ", vendorContactNumbers=" + vendorContactNumbers + "]";
+	}
+
+}

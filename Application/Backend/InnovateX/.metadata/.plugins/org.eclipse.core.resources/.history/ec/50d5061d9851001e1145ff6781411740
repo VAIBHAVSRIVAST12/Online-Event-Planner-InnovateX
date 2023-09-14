@@ -1,0 +1,21 @@
+package com.inovatex.vendor.dao;
+
+import java.util.List;
+
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.user.beans.PlanRequest;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.PlanRequestNotFoundExceptions;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.vendor.beans.Packages;
+import com.inovatex.vendor.exceptions.PackageAlreadyExistsException;
+
+public interface VendorDao {
+	int addPackage(Packages packages) throws PackageAlreadyExistsException;
+	Vendor getVendorByVendorId(int vendorID)throws VendorNotFoundException;
+	List<PlanRequest> allRequest()throws PlanRequestNotFoundExceptions;
+	int changePassword(int vendorId,String password) throws VendorNotFoundException;
+	
+}

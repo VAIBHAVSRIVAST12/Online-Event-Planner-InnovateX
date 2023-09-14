@@ -1,0 +1,18 @@
+package com.inovatex.admin.dao;
+
+import java.util.List;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.VendorAlreadyExistsException;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+public interface AdminDao {
+		Admin getAdminByAdminUsername(String adminUsername) throws AdminNotFoundExceptions ;
+		public int addVendor(Vendor vendor)throws VendorAlreadyExistsException;
+		public List<Vendor> viewVendors() throws VendorNotFoundException;
+		List<User> allUser()throws UserNotFoundExceptions;
+		int changeStatus(int userId)throws UserNotFoundExceptions;
+}

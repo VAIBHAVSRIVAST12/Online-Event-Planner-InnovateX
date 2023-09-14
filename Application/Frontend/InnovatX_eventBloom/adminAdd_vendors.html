@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Vendors</title>
+    <link rel="stylesheet" href="css/adminAddvendor.css" />
+  </head>
+  <body>
+    <div id="userinterface">
+      <h1><i>Add Vendors</i></h1>
+      <form id="registrationForm" action="adminpg.html" onsubmit="return validateForm()" >
+        <table>
+          <!-- Form fields here -->
+          <tr>
+            <th>Vendor Details</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td><label for="username">Vendor Name:</label></td>
+            <td>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                required
+                pattern="[a-zA-Z]+"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="address">Address:</label></td>
+            <td><textarea id="address" name="address" required></textarea></td>
+          </tr>
+          <tr>
+            <td><label for="contactno">Contact no:</label></td>
+            <td>
+              <input
+                type="tel"
+                id="contactno"
+                name="contactno"
+                required
+                pattern="[0-9]+"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" id="email" name="email" required /></td>
+          </tr>
+        </table>
+
+        <br />
+
+        <button type="submit" >Submit</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+
+        <!-- Success message -->
+        <p id="successMessage" style="display: none"></p>
+      </form>
+    </div>
+
+    <script>
+      // Add an event listener to the form's submit event
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the form from actually submitting
+
+          var username = document.getElementById("username").value;
+          var address = document.getElementById("address").value;
+          var contactno = document.getElementById("contactno").value;
+          var email = document.getElementById("email").value;
+
+          if (
+            username === "Ravi" ||
+            address === "AXP Apartments" ||
+            contactno === "9356781234" ||
+            email === "ravikum@gmail.com"
+          ) {
+            alert("Vendor already exists");
+          } else {
+           // alert("adminpg.html");
+          //  resetForm(); // Optionally, reset the form after showing the success message
+           <a href="adminpg.html"></a>
+          resetForm();
+
+          }
+        });
+
+      function resetForm() {
+        document.getElementById("registrationForm").reset();
+      }
+    </script>
+  </body>
+</html>

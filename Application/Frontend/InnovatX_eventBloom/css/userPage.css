@@ -1,0 +1,466 @@
+.login-body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #69c6ba;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.welcome-container {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190617/ourmid/pngtree-pink-wedding-gradient-dreamy-pink-banner-background-image_124256.jpg'); */
+  /* background-image: url('https://png.pngtree.com/back_origin_pic/03/99/41/0bdea645150fecb4760f4f90aa5c2e2a.jpg'); */
+  /* background-image: url('https://tse4.mm.bing.net/th?id=OIP.UCfdw2oqhcIusXtVSz4NSgHaEo&pid=Api&P=0&h=180'); */
+  /* background-image: url('https://wallpapercave.com/wp/gQSAMah.jpg'); */
+  /* background-image: url(' https://thumbs.dreamstime.com/z/delicate-pink-party-background-streamers-colorful-celebrating-carnival-forming-border-around-copy-space-83998772.jpg'); */
+  background-image: url(" https://thumbs.dreamstime.com/b/decorative-candle-wedding-event-backgrounds-bokeh-decorative-candle-wedding-event-124221053.jpg");
+  background-size: cover;
+  font-weight: bold;
+}
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+/* Navigation bar----------------------------------------------------- */
+
+.r-link {
+  display: var(--rLinkDisplay, inline-flex) !important;
+}
+
+.r-link[href] {
+  color: var(--rLinkColor) !important;
+  text-decoration: var(--rLinkTextDecoration, none) !important;
+}
+
+.r-list {
+  padding-left: var(--rListPaddingLeft, 0) !important;
+  margin-top: var(--rListMarginTop, 0) !important;
+  margin-bottom: var(--rListMarginBottom, 0) !important;
+  list-style: var(--rListListStyle, none) !important;
+}
+
+.menu {
+  --rLinkColor: var(--menuLinkColor, currentColor);
+}
+
+.menu__link {
+  display: var(--menuLinkDisplay, block);
+}
+
+.menu__link:focus {
+  outline: var(--menuLinkOutlineWidth, 2px) solid
+    var(--menuLinkOutlineColor, currentColor);
+  outline-offset: var(--menuLinkOutlineOffset);
+}
+
+.menu:hover .menu__link:not(:hover) {
+  --rLinkColor: var(--menuLinkColorUnactive, rgba(22, 22, 22, 0.35));
+}
+
+.menu {
+  background-color: var(--menuBackgroundColor, #ffe0b2);
+  box-shadow: var(
+    --menuBoxShadow,
+    0 1px 3px 0 rgba(0, 0, 0, 0.12),
+    0 1px 2px 0 rgba(0, 0, 0, 0.24)
+  );
+}
+
+.menu__list {
+  display: flex;
+}
+
+.menu__link {
+  padding: var(--menuLinkPadding, 1.5rem 2.5rem);
+  font-weight: 800;
+  /* text-transform: uppercase; */
+}
+
+.text-underlined {
+  position: relative;
+  overflow: hidden;
+
+  will-change: color;
+  transition: color 0.25s ease-out;
+}
+
+.text-underlined::before,
+.text-underlined::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  background-color: var(--textUnderlinedLineColor, currentColor);
+
+  will-change: width;
+  transition: width 0.1s ease-out;
+
+  position: absolute;
+  bottom: 0;
+}
+
+.text-underlined::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text-underlined::after {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.text-underlined:hover::before,
+.text-underlined:hover::after {
+  width: 100%;
+  transition-duration: 0.2s;
+}
+
+.menu__group1 {
+  padding-left: 750px;
+}
+
+/* ================================================================= */
+
+.welcome-greet {
+  align-content: center;
+  font-size: 50px;
+  font-style: italic;
+  /* font-family: 'Libre Baskerville', serif; */
+  font-family: "Anton", sans-serif;
+  padding-left: 500px;
+  padding-right: 10px;
+  color: white;
+}
+a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+  margin-top: 10px;
+  display: block;
+}
+
+#welcome-message {
+  font-size: 16px;
+  justify-content: flex-start;
+  padding-left: 500px;
+  padding-right: 10px;
+  color: white;
+  font-family: "Libre Baskerville", serif;
+  /* font-family: 'font-family: 'Anton', sans-serif; */
+  /* font-family: 'Satisify'; */
+}
+.navbar-nav {
+  align-items: center;
+  background-color: #1de9b6;
+}
+
+/* .nav-item{
+    border-radius: 20px;
+    border-color: #ffffff;
+  
+  } */
+.menu-bar {
+  background-color: #1de9b6;
+}
+
+/* .titlediv{
+    background: "https://image.freepik.com/free-photo/abstract-blur-background-wedding-party-background_39704-315.jpg" !important;
+  } */
+#new-products {
+  /* background-color: #1DE9B6; */
+  background-image: url("https://thumbs.dreamstime.com/b/abstract-blurred-wedding-ceremony-convention-hall-abstract-blurred-wedding-ceremony-convention-hall-109638182.jpg");
+  padding: 20px;
+  /* margin: 5rem 3rem 2rem 3rem; */
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Libre Baskerville", serif;
+  /* padding-left: 50px; */
+  align-items: center;
+}
+
+.sec3head {
+  font-size: 3rem;
+  color: black;
+}
+
+.sec3name {
+  font-size: 1.2rem;
+  color: black;
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 2.5rem;
+  font-weight: bold;
+}
+
+.sec2para {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: black;
+  font-weight: bold;
+}
+
+.carousel-item {
+  padding: 3% 15%;
+}
+
+/* .titlediv{
+    background-color: #ffffff;
+    padding:0 15%;
+    margin-bottom: 30px;
+  } */
+
+.last-section-buttons {
+  align-items: center;
+  margin-left: 200px;
+}
+.plan-btn:link,
+.plan-btn:active {
+  display: inline-block;
+  padding: 5px;
+  color: black;
+  background-color: #ffe0b2;
+  text-decoration: none;
+  border: none;
+  border-radius: 2px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 22px;
+  text-decoration-color: black;
+  margin: 8px;
+  /* margin-right: 50px; */
+  width: 500px;
+  transition: background-color 0.3s;
+}
+.qotation-btn:link,
+.qotation-btn:active {
+  display: inline-block;
+  padding: 5px;
+  color: black;
+  background-color: #ffe0b2;
+  text-decoration: none;
+  border: none;
+  border-radius: 2px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 22px;
+  text-decoration-color: black;
+  margin: 8px;
+  width: 500px;
+  transition: background-color 0.3s;
+}
+.plan-btn:hover,
+.qotation-btn:hover {
+  background-color: #ffe0b2; /* Change the background color on hover */
+}
+
+/* ---------------------------------------------------- */
+.plan-request-body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  /* background-color: #1DE9B6; */
+  background-image: url("https://image.freepik.com/free-photo/abstract-blur-background-wedding-party-background_39704-315.jpg") !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.plan-request-input {
+  /* background-color:#1DE9B6; */
+  color: black;
+  /* padding: 10 300 200 200px; */
+  /* padding-top: 10px; */
+  padding-bottom: 50px;
+  font-style: normal;
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+}
+.plan-form {
+  margin: 250px;
+  padding: 50px;
+  background-color: #fff3e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  font-size: 19px;
+}
+
+.success-message {
+  display: none;
+  color: green;
+}
+
+/*
+  .dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+/* .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+/* .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  } */
+
+/* Links inside the dropdown */
+/* .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;} */
+
+/* -------------Service list----------*/
+
+#servicesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+#service-label {
+  flex: 1;
+}
+.send-request-btn {
+  padding-top: 20px;
+  padding-left: 3px;
+}
+.send-request-btn:link,
+.send-request-btn:visited {
+  /* margin: 10px; */
+  color: black;
+  padding-top: 2px;
+  /* border: 1px solid; */
+  font-size: 1rem;
+  border-radius: 2px;
+  transition: 0.3s;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  align-items: center;
+}
+
+/* profile card ---------------------------------------*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@300;400;500;700&display=swap");
+:root {
+  --primary-color: #f2726a;
+  --white-color: #fff;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.profile_body {
+  height: 100vh;
+  /* background:linear-gradient(45deg, #00853e, #50c878); */
+  background-image: url("https://i.pinimg.com/originals/83/73/71/837371fb2f2e6467ec066841b6275a65.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins";
+  padding-top: 150px;
+}
+.card {
+  height: 400px;
+  width: 300px;
+  border-radius: 25px;
+  background-color: inherit;
+  border-color: black;
+  text-align: center;
+  overflow: hidden;
+}
+
+.card__name {
+  font-weight: 600;
+  color: black;
+  margin-top: 50px;
+}
+
+.card__details {
+  color: black;
+  font-weight: bold;
+}
+.card__link {
+  color: black;
+}
+
+.card__link a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 25px 16px;
+}
+.card__link i {
+  transition: 0.3s;
+}
+
+.card__link i:hover {
+  color: var(--primary-color);
+}
+
+.card__btn-edit {
+  margin: 18px;
+  background-color: transparent;
+  color: black;
+  padding: 12px 23px;
+  border: 1px solid;
+  color: black;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card__btn-edit:hover {
+  background-color: #f48fb1;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add Package</title>
+    <link rel="stylesheet" href="css/vendoraddpackage.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add Package</h1>
+      <form action="vendorHomePage.html">
+        <div class="form-group">
+          <label for="id">ID:</label>
+          <input type="text" id="id" name="id" required/>
+        </div>
+        <div class="form-group">
+          <label for="typee">Type:</label>
+          <input type="text" id="typee" name="typee"  />
+        </div>
+
+        <div class="form-group">
+          <label for="package-type">Package Type:</label>
+          <select id="package-type" name="package-type" required>
+            <option value="Basic">Basic</option>
+            <option value="Premium">Premium</option>
+            <option value="Classic">Classic</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="services">List of Services:</label>
+          <ul class="services-list">
+            <li>
+              <input type="checkbox" name="services[]" value="Decoration"required />
+              Decoration :
+            </li>
+            &nbsp &nbsp &nbsp
+            <input
+              type="text"
+              placeholder="Enter the amount
+            here"
+              style="color: gray"
+              id="typee"
+              name="typee"
+              required
+            />
+            per day
+            <br />
+
+            <br />
+            <li>
+              <input type="checkbox" name="services[]" value="Photography" required/>
+              Photography :
+            </li>
+            &nbsp &nbsp &nbsp
+            <input
+              type="text"
+              placeholder="Enter the amount
+            here"
+              style="color: gray"
+              id="typee"
+              name="typee"
+              required
+            />
+
+            <br /><br />
+            <li>
+              <input type="checkbox" name="services[]" value="Catering" />
+              Catering :
+            </li>
+
+            &nbsp &nbsp &nbsp
+            <input
+              type="text"
+              placeholder="Enter the amount
+            here"
+              style="color: gray"
+              id="typee"
+              name="typee"
+              required
+            />
+            per person
+            <br />
+
+            <!-- Add more services here -->
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <button id="alertButton">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // JavaScript code to auto-fill input values
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get references to the input fields
+        const idInput = document.getElementById("id");
+        const predefinedid = "p-1";
+        idInput.value = predefinedid;
+      });
+
+      // Get a reference to the button element
+      var button = document.getElementById("alertButton");
+
+      // Add a click event listener to the button
+      button.addEventListener("click", function () {
+        Display an alert when the button is clicked
+       alert("Package Added successfully");
+       onsubmit();
+      });
+    </script>
+  </body>
+</html>

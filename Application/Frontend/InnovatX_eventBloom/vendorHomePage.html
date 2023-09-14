@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Home Page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/adminpg.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="index.html"
+        ><img src="img/logo.png" alt="Site logo" width="50" height="50" /><i
+          >Event Bloom</i></a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+          <a class="nav-link" href="index.html" style="font-size: 16px; font-weight: bold;">Log Out</a>
+        </li>
+
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <h1>Welcome, Vendor!</h1>
+      <div class="row justify-content-center">
+        <!-- Center align the row -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Add Package</h5>
+              <p class="card-text">Click to add a package.</p>
+              <a href="vendorAddPackage.html">Add Package</a><br />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">View User Requests</h5>
+              <p class="card-text">Click here to view user requests.</p>
+              <a href="vendorUser_request.html">View User Requests</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/adminLogin.css" />
+    <title>Admin Login</title>
+  </head>
+>
+    <script type="text/javascript">
+      function validateform()
+      {
+        var username1=document.f1.username.value;
+        var password1=document.f1.password.value;
+        if(username1!="Vaibhav" && password1!="123456789")
+        {
+          alert("Wrong credentials")
+          return false;
+        }
+
+      }
+      </script>
+    <body>
+      <div class="login-page">
+        <div class="form">
+          <div class="login">
+            <div class="login-header">
+              <h1>LOGIN</h1>
+              <p>Please enter your credentials to login.</p>
+            </div>
+          </div>
+          <form class="login-form" name="f1" action ="adminpg.html" onsubmit="return validateform()">
+            <input type="text" name="username"placeholder="Admin" required>
+            <input type="password" name="password"placeholder="password" required>
+            <input type="submit" id="c1" type ="Log in">
+
+          </form>
+        </div>
+      </div>
+
+    </body>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+package com.inovatex.user.beans;
+
+public class User {
+
+}

@@ -1,0 +1,21 @@
+package com.inovatex.admin.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.dao.AdminDao;
+import com.inovatex.admin.dao.AdminDaoImpl;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+
+public class AdminServiceImpl implements AdminService {
+	AdminDao adminDao = new AdminDaoImpl();
+
+	@Override
+	public Admin getAdminByAdminUsername(String adminUsername) throws AdminNotFoundExceptions {
+		return adminDao.getAdminByAdminUsername(adminUsername);
+	}
+
+}
+
+	

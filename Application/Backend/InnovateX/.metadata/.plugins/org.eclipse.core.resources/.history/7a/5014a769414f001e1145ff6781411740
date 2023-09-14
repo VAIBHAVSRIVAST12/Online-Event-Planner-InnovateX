@@ -1,0 +1,162 @@
+package com.inovatex.user.ui;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Scanner;
+
+import com.inovatex.planrequest.beans.PlanRequest;
+import com.inovatex.planrequest.service.PlanRequestService;
+import com.inovatex.planrequest.service.PlanRequestServiceImpl;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.user.service.UserService;
+import com.inovatex.user.service.UserServiceImpl;
+
+public class UIApplication {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		UserService userService = new UserServiceImpl();
+		PlanRequestService  planRequestService = new PlanRequestServiceImpl();
+		int choice=0;
+		while(choice!=10) {
+			System.out.println("1. Add Users");
+			System.out.println("2. Change password by username");
+			System.out.println("3. Change status by username");
+			System.out.println("4. Search Users by username");
+			System.out.println("5. Display ALL users");
+			System.out.println("6. Delete user by username");
+			System.out.println("7. Add Plan Request");
+			System.out.println("8. Delete Plan Request");
+			System.out.println("9. View Plan Request");
+			System.out.println("10. Exit");
+			System.out.println("Enter choice ");
+			choice = sc.nextInt();
+			switch(choice) {
+			case 1:
+			{
+				LocalDate datejoin = LocalDate.parse("2012-12-12",DateTimeFormatter.ISO_DATE);
+				User user = new User("G narak","karan-2001","narak2001",datejoin,datejoin,"WholeSaleIT","947609485","karan@gmail.com","PortBlair");
+				try {
+					int rows=userService.addUser(user);
+					if(rows>0)
+						System.out.println("inserted");
+					else
+						System.out.println("not-inserted");
+				} catch (UserAlreadyExistsException e) {
+					System.err.println(e.getMessage());
+				}
+				break;
+			}
+		
+			case 2:
+			{
+				System.out.println("Enter username and new password:");
+				String username = sc.next();
+				String password = sc.next();
+				try {
+					int rows=userService.changePassword(username, password);
+					if(rows>0)
+						System.out.println("Password changed succesfully");
+					else
+						System.out.println("Password not change");
+				} catch (UserNotFoundExceptions e) {
+					System.err.println(e.getMessage());
+				}
+				break;
+			}
+			case 3:
+			{
+
+				System.out.println("Enter username and status:");
+				String username = sc.next();
+				String status = sc.next();
+				try {
+					int rows=userService.changeStatus(username, status);
+					System.out.println(rows);
+					if(rows>0)
+						System.out.println("status changed succesfully");
+					else
+						System.out.println("status not change");
+				} catch (UserNotFoundExceptions e) {
+					System.err.println(e.getMessage());
+				}
+				break;
+			}
+			case 4:{
+				System.out.println("Enter the username :");
+				String username =sc.next();
+				try {
+					User user= userService.getUserByUsername(username);
+					System.out.println(user);
+				} catch (UserNotFoundExceptions e) {
+					System.err.println(e.getMessage());
+					
+				}
+				break;
+			}
+			case 5:{
+				try {
+			
+				List<User> userList = userService.allUser();
+				for (User user : userList) {
+					System.out.println(user);
+				}
+				}catch (UserNotFoundExceptions e) {
+					System.err.println(e.getMessage());
+					
+				}
+				break;
+			}
+			case 6:{
+				System.out.println("Enter the username:");
+				String username =sc.next();
+				try {
+					int rows= userService.deleteUser(username);
+					if(rows>0)
+						System.out.println("Deleted");
+					else
+						System.out.println("Not-Deleted");
+					
+				} catch (UserNotFoundExceptions e) {
+					System.err.println(e.getMessage());
+									}
+				break;
+			}
+			case 7:{
+				LocalDate fromDate = LocalDate.parse("2012-12-12",DateTimeFormatter.ISO_DATE);
+				int userId=userService.getUserByUsername("karan2001").getUserId();
+				PlanRequest planRequest = new PlanRequest(fromDate,fromDate,"Decoration	 Photography Catering",300,"etc"); 
+				try {
+					int rows=planRequestService.addPlanRequest(planRequest,userId);
+					if(rows>0)
+						System.out.println("inserted");
+					else
+						System.out.println("not-inserted");
+				} catch (UserAlreadyExistsException e) {
+					System.err.println(e.getMessage());
+				}
+				break;
+			}
+			case 8:{
+				
+				break;
+			}
+			case 9:{
+				
+				break;
+			}
+			case 10:{
+				System.out.println("Exit....");
+				break;
+			}
+			default:
+				System.out.println("Invalid choice...");
+	}
+
+}
+}
+}
+

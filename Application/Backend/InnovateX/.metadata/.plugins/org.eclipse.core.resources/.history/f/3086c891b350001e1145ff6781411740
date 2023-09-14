@@ -1,0 +1,42 @@
+package com.inovatex.admin.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.dao.AdminDao;
+import com.inovatex.admin.dao.AdminDaoImpl;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.AdminWrongPasswordException;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.user.exceptions.UserWrongPasswordException;
+
+public class AdminServiceImpl implements AdminService {
+	AdminDao adminDao = new AdminDaoImpl();
+
+	@Override
+	public Admin getAdminByAdminUsername(String adminUsername) throws AdminNotFoundExceptions {
+		return adminDao.getAdminByAdminUsername(adminUsername);
+	}
+
+	@Override
+	public boolean validateAdmin(String adminUsername, String adminPassword)
+			throws AdminNotFoundExceptions, AdminWrongPasswordException {
+		try {
+			Admin admin = getAdminByAdminUsername(adminUsername);
+			if(admin.getAdminPassword().equals(adminPassword)) {
+				return true;
+			}
+			else {
+				throw new AdminWrongPasswordException();
+			}
+		} catch (AdminNotFoundExceptions e) {
+			throw new AdminNotFoundExceptions();
+		}
+
+	}
+
+}
+
+	

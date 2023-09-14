@@ -1,0 +1,15 @@
+package com.inovatex.admin.service;
+
+import java.util.List;
+
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.AdminWrongPasswordException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.user.exceptions.UserWrongPasswordException;
+
+public interface AdminService {
+	Admin getAdminByAdminUsername(String adminUsername) throws AdminNotFoundExceptions ;
+	boolean validateAdmin(String adminUsername,String adminPassword) throws AdminNotFoundExceptions, AdminWrongPasswordException;
+}

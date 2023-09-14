@@ -1,0 +1,46 @@
+package com.inovatex.vendor.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.utils.DBConnections;
+
+public class VendorDaoImpl implements VendorDao{
+	Connection conn;
+	PreparedStatement preparedStatement;
+	ResultSet resultSet;
+	@Override
+	public Vendor getVendorByVendorId(int vendorID) throws VendorNotFoundException {
+		conn = DBConnections.getConnection();
+		String selectquery="select * from vendor where vendorid=?";
+		try {
+			preparedStatement=conn.prepareStatement(selectquery);
+			preparedStatement.setInt(1, vendorID);
+			resultSet=preparedStatement.executeQuery();
+			if(resultSet.next())
+			{	
+				Vendor vendor = new Vendor();
+				vendor.setVendorId(resultSet.getInt("VendorID"));
+				vendor.setVendorName(resultSet.getString("VendorName"));
+				vendor.setVendorAddress(resultSet.getString("VendorAddress"));
+				vendor.setVendorEmail(resultSet.getString("VendorEmail"));
+				vendor.setVendorContactnumbers(resultSet.getString("VendorContactNumbers"));
+				vendor.setVendorPassword(resultSet.getString("vendorpassword"));
+				return vendor;
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBConnections.close();
+		throw new VendorNotFoundException();
+	
+	}
+
+}

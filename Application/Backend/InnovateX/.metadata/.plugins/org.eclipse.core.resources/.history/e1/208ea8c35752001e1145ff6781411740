@@ -1,0 +1,560 @@
+package com.inovatex.ui;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.dao.AdminDaoImpl;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.AdminWrongPasswordException;
+import com.inovatex.admin.exceptions.VendorAlreadyExistsException;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.admin.service.AdminService;
+import com.inovatex.admin.service.AdminServiceImpl;
+import com.inovatex.user.beans.PlanRequest;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.PlanRequestNotFoundExceptions;
+import com.inovatex.user.exceptions.UserAlreadyExistsException;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.user.exceptions.UserWrongPasswordException;
+import com.inovatex.user.service.UserService;
+import com.inovatex.user.service.UserServiceImpl;
+import com.inovatex.vendor.beans.Packages;
+import com.inovatex.vendor.beans.Quotation;
+import com.inovatex.vendor.exceptions.PackageAlreadyExistsException;
+import com.inovatex.vendor.exceptions.PackageNotFoundExceptions;
+import com.inovatex.vendor.exceptions.QuotationNotFoundExceptions;
+import com.inovatex.vendor.exceptions.VendorWrongPasswordException;
+import com.inovatex.vendor.service.VendorService;
+import com.inovatex.vendor.service.VendorServiceImpl;
+
+public class MainApplication {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		UserService userService = new UserServiceImpl();
+		AdminService adminService = new AdminServiceImpl();
+		VendorService vendorService = new VendorServiceImpl();
+		int mainChoice=0;
+		while(mainChoice!=5)
+		{
+			System.out.println("--------------------------------------------");
+			System.out.println("******************INOVATEX******************");
+			System.out.println("--------------------------------------------");
+			System.out.println("1. Admin Login");
+			System.out.println("2. Vendor Login");
+			System.out.println("3. User Login");
+			System.out.println("4. User Registration");
+			System.out.println("5. Exit Application");
+			System.out.println("Enter choice: ");
+			mainChoice = sc.nextInt();
+			switch(mainChoice) {
+			case 1:{
+				System.out.println("--------------------------------------------");
+				System.out.println("----------------Admin Login-----------------");
+				System.out.println("--------------------------------------------");
+				System.out.println("Username:");
+				String adminUsername = sc.next();
+				System.out.println("Password:");
+				String adminPassword = sc.next();
+				boolean adminLoginResult=false;
+				try {
+					adminLoginResult = adminService.validateAdmin(adminUsername, adminPassword);
+				} catch (AdminNotFoundExceptions |AdminWrongPasswordException e) {
+					System.err.println(e.getMessage());
+				} 
+				if(adminLoginResult) {
+					System.out.println("Login Successfully...");
+					int adminChoice=0;
+					while(adminChoice!=5) {
+						System.out.println("--------------------------------------------");
+						System.out.println("--------------Admin HomePage----------------");
+						System.out.println("--------------------------------------------");
+						System.out.println("1. Add Vendor");
+						System.out.println("2. View Vendor");
+						System.out.println("3. View User Registrations");
+						System.out.println("4. Change Status of user");
+						System.out.println("5. Logout Admin");
+						adminChoice = sc.nextInt();
+						switch(adminChoice) {
+						case 1:{
+							System.out.println("-------------- Add Vendor----------------");
+							System.out.println("Enter vendorName:");
+							String vendorName = sc.next();
+							System.out.println("Enter password:");
+							String vendorPassword = sc.next();
+							sc.nextLine();
+							System.out.println("Enter vendorAddress:");
+							String vendorAddress = sc.nextLine();
+							System.out.println("Enter vendorEmail:");
+							String vendorEmail = sc.next();
+							System.out.println("Enter vendorContactNumbers:");
+							String vendorContactNumbers = sc.next();
+							
+							Vendor vendor = new Vendor();
+							vendor.setVendorEmail(vendorEmail);
+							vendor.setVendorAddress(vendorAddress);
+							vendor.setVendorName(vendorName);
+							vendor.setVendorContactnumbers(vendorContactNumbers);
+							vendor.setVendorPassword(vendorPassword);
+							try {
+								int rows=adminService.addVendor(vendor);
+								if(rows>0)
+									System.out.println("Vendor register Successfully");
+								else
+									System.out.println("Vendor not register");
+							} catch (VendorAlreadyExistsException e) {
+								System.err.println(e.getMessage());
+							}
+							break;
+						}
+						case 2:{
+							System.out.println("-------------- View Vendor----------------");
+							try {
+								List<Vendor> vendorList = adminService.viewVendors();
+								if(vendorList.size()==0) {
+									System.out.println("No vendor added!");
+									break;
+								}
+								for (Vendor vendor : vendorList) {
+									System.out.println(vendor);
+								}
+								}catch (VendorNotFoundException e) {
+									System.err.println(e.getMessage());
+									
+								}
+							break;
+						}
+						case 3:{
+							System.out.println("-----------View User Registrations------------");
+						try {
+							
+							List<User> userList = adminService.allUser();
+							if(userList.size()==0) {
+								System.out.println("No user !");
+								break;
+							}
+							for (User user : userList) {
+								System.out.println(user);
+							}
+							}catch (UserNotFoundExceptions e) {
+								System.err.println(e.getMessage());
+							
+							
+							}
+							break;
+						}
+						case 4:{
+							System.out.println("-----------Change user status------------");
+							System.out.println("Enter userId and status[active/non-active]:");
+							int userId = sc.nextInt();
+							String status = sc.next();
+							try {
+								int rows=adminService.changeStatus(userId, status);
+								System.out.println(rows);
+								if(rows>0)
+									System.out.println("status changed succesfully");
+								else
+									System.out.println("status not change");
+							} catch (UserNotFoundExceptions e) {
+								System.err.println(e.getMessage());
+							}
+							break;
+						}
+						case 5:{
+							System.out.println("Admin Logout..");
+							break;
+						}
+						default:
+							System.out.println("Invalid choice... ");
+						}
+					}
+				}
+				else {
+					System.out.println("Login Unsuccessfully...");
+					break;
+				}
+				break;
+			}
+			case 2:{
+				System.out.println("--------------------------------------------");
+				System.out.println("---------------Vendor Login-----------------");
+				System.out.println("--------------------------------------------");
+				System.out.println("VendorId:");
+				int vendorID = sc.nextInt();
+				System.out.println("Password:");
+				String vendorPassword = sc.next();
+				boolean vendorLoginResult = false;//validate(vendorId,vendorPassword)
+				try {
+					vendorLoginResult = vendorService.validateVendor(vendorID, vendorPassword);
+				} catch (VendorNotFoundException |VendorWrongPasswordException e) {
+					System.err.println(e.getMessage());
+				} 
+				if(vendorLoginResult) {
+					System.out.println("Login Successfully...");
+					int vendorChoice=0;
+					while(vendorChoice!=7) {
+						System.out.println("--------------------------------------------");
+						System.out.println("--------------Vendor HomePage----------------");
+						System.out.println("--------------------------------------------");
+						System.out.println("1. Add Package ");
+						System.out.println("2. View Packages ");
+						System.out.println("3. View User Request");
+						System.out.println("4. Create Quotation");
+						System.out.println("5. View Quotation");
+						System.out.println("6. Change password");
+						System.out.println("7. Logout Vendor");
+						vendorChoice = sc.nextInt();
+						switch(vendorChoice) {
+						case 1:{
+							System.out.println("-------------- Add Package----------------");
+							System.out.println("Enter Type of Event:");
+							String typeOfEvent = sc.next();
+							System.out.println("Enter package type [Basic/classic/premium]:");
+							String packageType = sc.next();
+							System.out.println("Enter Amount for Decoration per day:");
+							double decoration = sc.nextInt();
+							System.out.println("Enter Amount for photography per day:");
+							double photography = sc.nextInt();
+							System.out.println("Enter Amount for catering veg per plate:");
+							double catering_veg = sc.nextDouble();
+							System.out.println("Enter Amount for catering non-veg per plate:");
+							double catering_nonveg = sc.nextDouble();
+							sc.nextLine();
+							System.out.println("Enter otherservice:");
+							String otherservice = sc.nextLine();
+							Packages packages = new Packages();
+							packages.setTypeOfEvent(typeOfEvent);
+							packages.setPackageType(packageType);
+							packages.setVendorID(vendorID);
+							packages.setOtherservice(otherservice);
+							packages.setCatering_nonveg(catering_nonveg);
+							packages.setCatering_veg(catering_veg);
+							packages.setDecoration(decoration);
+							packages.setPhotography(photography);
+							try {
+								int rows=vendorService.addPackage(packages);
+								if(rows>0)
+									System.out.println("package added Successfully");
+								else
+									System.out.println("package not added");
+							} catch (PackageAlreadyExistsException e) {
+								System.err.println(e.getMessage());
+							}
+
+							break;
+						}
+						case 2:{
+							System.out.println("-------------- View Packages----------------");
+							try {
+								
+								List<Packages> packagesList = vendorService.viewPackages(vendorID);
+								if(packagesList.size()==0) {
+									System.out.println("No packages added!");
+									break;
+								}
+								for (Packages packages : packagesList) {
+									System.out.println(packages);
+								}
+								}catch (PackageNotFoundExceptions e) {
+									System.err.println(e.getMessage());
+									
+								}
+							break;
+						}
+						case 3:{
+							System.out.println("-------------- View User Request----------------");
+							try {
+								
+								List<PlanRequest> planRequestList = vendorService.allRequest();
+								if(planRequestList.size()==0) {
+									System.out.println("No user Request added!");
+									break;
+								}
+								for (PlanRequest PlanRequest : planRequestList) {
+									System.out.println(PlanRequest);
+								}
+								}catch (PlanRequestNotFoundExceptions e) {
+									System.err.println(e.getMessage());
+									
+								}
+							break;
+						}
+						case 4:{
+							System.out.println("------------Create Quotation-------------");
+							//Create Quotation
+							System.out.println("Enter PackageType[basic/classic/premium]:");
+							String packageType = sc.next();
+							System.out.println("Enter planRequestId:");
+							int planRequestId = sc.nextInt();
+							try {
+								int userId=vendorService.getUserIdByPlanRequestId(planRequestId);
+								double estAmount = vendorService.calculatingAmount(vendorID, packageType, planRequestId);
+								Quotation quotation = new Quotation();
+								quotation.setVendorID(vendorID);
+								quotation.setPlanRequestID(planRequestId);
+								quotation.setQuotationEstimatedAmount(estAmount);
+								quotation.setUserID(userId);
+							} catch (PlanRequestNotFoundExceptions | UserNotFoundExceptions e) {
+								System.err.println(e.getMessage());
+							}
+						
+							break;
+						}
+						case 5:{
+							System.out.println("------------View Quotation-------------");
+							try {
+								
+								List<Quotation> quotationList = vendorService.viewQuotationForVendor(vendorID);
+								if(quotationList.size()==0) {
+									System.out.println("No Quotation created!");
+									break;
+								}
+								for (Quotation quotation : quotationList) {
+									System.out.println(quotation);
+								}
+								}catch (QuotationNotFoundExceptions  e) {
+									System.err.println(e.getMessage());
+									
+								}
+							break;
+						
+						}
+						case 6:{
+							System.out.println("-------------- Change Password----------------");
+							System.out.println("Enter new Password:");
+							String usernewPassword = sc.next();
+							try {
+								int changed = vendorService.changePassword(vendorID, usernewPassword);
+								if(changed>0)
+									System.out.println("Password changed succesfully");
+								else
+									System.out.println("Password not change");
+							} catch (VendorNotFoundException e) {
+								System.err.println(e.getMessage());
+							}
+							break;
+						}
+						case 7:{
+							System.out.println("Vendor Logout..");
+							break;
+						}
+						default:
+							System.out.println("Invalid choice... ");
+						}
+					}
+				}
+				else {
+					System.out.println("Login Unsuccessfully...");
+					break;
+				}
+				break;
+			}
+			case 3:{
+				System.out.println("--------------------------------------------");
+				System.out.println("-----------------User Login-----------------");
+				System.out.println("--------------------------------------------");
+				System.out.println("Username:");
+				String username = sc.next();
+				System.out.println("Password:");
+				String userPassword = sc.next();
+				boolean userLoginResult=false;
+				try {
+					userLoginResult = userService.validateUser(username, userPassword);
+				} catch (UserNotFoundExceptions | UserWrongPasswordException e) {
+					System.err.println(e.getMessage());
+				}
+				int userId=0;
+				try {
+					 userId = userService.getUserIdByUsername(username);
+				} catch (UserNotFoundExceptions e) {
+					System.err.println(e.getMessage());
+				}
+				if(userLoginResult) {
+					System.out.println("Login Successfully...");
+					int userChoice=0;
+					
+					while(userChoice!=6) {
+						System.out.println("--------------------------------------------");
+						System.out.println("--------------User HomePage----------------");
+						System.out.println("--------------------------------------------");
+						System.out.println("1. View Profile ");
+						System.out.println("2. Change Password");
+						System.out.println("3. Send Plan Request ");
+						System.out.println("4. View Quotations");
+						System.out.println("5. Select Quotations");
+						System.out.println("6. User Logout");
+						userChoice = sc.nextInt();
+						
+						switch(userChoice) {
+						case 1:{
+							System.out.println("-------------- View Profile----------------");
+							try {
+								HashMap<String, String> userProfile = userService.viewProfile(username);
+								 for (HashMap.Entry<String, String> entry : userProfile.entrySet()) {
+							            System.out.println( entry.getKey()+ ": " +entry.getValue() );
+							        }
+							} catch (UserNotFoundExceptions e) {
+								System.err.println(e.getMessage());
+							}
+							break;
+						}
+						case 2:{
+							System.out.println("-------------- Change Password----------------");
+							System.out.println("Enter new Password:");
+							String usernewPassword = sc.next();
+							try {
+								int changed = userService.changePassword(username, usernewPassword);
+								if(changed>0)
+									System.out.println("Password changed succesfully");
+								else
+									System.out.println("Password not change");
+							} catch (UserNotFoundExceptions e) {
+								System.err.println(e.getMessage());
+							}
+							break;
+						}
+						case 3:{System.out.println("------------Send Plan Request-------------");
+						System.out.println("Enter from date[YYYY-MM-DD]:");
+						String fromDate = sc.next();
+						LocalDate fromLocalDate = LocalDate.parse(fromDate,DateTimeFormatter.ISO_DATE);
+						System.out.println("Enter to date[YYYY-MM-DD]:");
+						String toDate = sc.next();
+						LocalDate toLocalDate = LocalDate.parse(toDate,DateTimeFormatter.ISO_DATE);
+						sc.nextLine();
+						System.out.println("Enter list of Service:");
+						String servicesNeeded= sc.nextLine();
+						System.out.println("Enter no of person:");
+						int numberOfPersons=sc.nextInt();
+						sc.nextLine();
+						System.out.println("Enter other Service:");
+						String otherServive= sc.nextLine();
+						
+							
+							PlanRequest planRequest = new PlanRequest(fromLocalDate,toLocalDate,servicesNeeded,numberOfPersons,otherServive); 
+							int rows=userService.addPlanRequest(planRequest,userId);
+							if(rows>0)
+								System.out.println("Request created");
+							else
+								System.out.println("Request not created");
+						
+							break;
+						}
+						case 4:{System.out.println("------------View Quotation-------------");
+						try {
+							
+							List<Quotation> quotationList = vendorService.viewQuotation(userId);
+							if(quotationList.size()==0) {
+								System.out.println("No Quotation created!");
+								break;
+							}
+							for (Quotation quotation : quotationList) {
+								System.out.println(quotation);
+							}
+							}catch (QuotationNotFoundExceptions  e) {
+								System.err.println(e.getMessage());
+								
+							}
+							break;
+						}
+						case 5:{System.out.println("------------Select Quotationst-------------");
+						System.out.println("Enter quotationId and select[Accepted/Pending/Rejected]:");
+						int quotationId = sc.nextInt();
+						String quotationstatus = sc.next();
+						
+						try {
+							int rows=vendorService.selectQuotation(quotationId, quotationstatus);
+							System.out.println(rows);
+							if(rows>0) {
+								int row=vendorService.setSelectQuotationId(username, quotationId);
+								if(row>0)
+								System.out.println("Quotation "+quotationstatus);
+								else
+									System.out.println("Quotation not"+quotationstatus);
+							}
+							else
+								System.out.println("Quotation not"+quotationstatus);
+						} catch (QuotationNotFoundExceptions | UserNotFoundExceptions e) {
+							System.err.println(e.getMessage());
+						}
+							break;
+						}
+						case 6:{
+							System.out.println("User Logout..");
+							break;
+						}
+						default:
+							System.out.println("Invalid choice... ");
+						}
+					}
+				}
+				else {
+					System.out.println("Login Unsuccessfully...");
+					break;
+				}
+				break;
+			}
+			case 4:{
+				System.out.println("--------------------------------------------");
+				System.out.println("-------------User Registration--------------");
+				System.out.println("--------------------------------------------");
+				System.out.println("Enter Username:");
+				String username = sc.next();
+				System.out.println("Enter Password:");
+				String password = sc.next();
+				sc.nextLine();
+				System.out.println("Enter FullName:");
+				String fullName = sc.nextLine();
+				System.out.println("Enter DateOfBirth[YYYY-MM-DD:");
+				String dateOfBirth = sc.next();
+				LocalDate localDateOfBirth = LocalDate.parse(dateOfBirth,DateTimeFormatter.ISO_DATE);
+				LocalDate localDateOfJoin = LocalDate.now();
+				System.out.println("Enter Department:");
+				String department = sc.next();
+				System.out.println("Enter Mobile:");
+				String mobile = sc.next();
+				System.out.println("Enter Email:");
+				String email = sc.next();
+				System.out.println("Enter Location:");
+				String location = sc.next();
+				User user = new User();
+				user.setUsername(username);
+				user.setUserPassword(password);
+				user.setUserFullName(fullName);
+				user.setUserDateOfBirth(localDateOfBirth);
+				user.setUserDateOfJoining(localDateOfJoin);
+				user.setUserEmail(email);
+				user.setUserMobile(mobile);
+				user.setUserLocation(location);
+				user.setUserDepartment(department);
+				try {
+					int rows=userService.addUser(user);
+					if(rows>0)
+						System.out.println("User register Successfully");
+					else
+						System.out.println("User not register");
+				} catch (UserAlreadyExistsException e) {
+					System.err.println(e.getMessage());
+				}
+				break;
+			}
+			case 5:{
+				
+				System.out.println("--------------------------------------------");
+				System.out.println("-----------------Thank You------------------");
+				System.out.println("--------------------------------------------");
+				break;
+			}
+			default:
+			{
+				System.out.println("Invalid choice....");
+			}
+			}
+		}
+		sc.close();
+	}
+
+}

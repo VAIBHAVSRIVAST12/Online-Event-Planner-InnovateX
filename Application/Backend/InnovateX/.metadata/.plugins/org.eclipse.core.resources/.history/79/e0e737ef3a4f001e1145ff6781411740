@@ -1,0 +1,5 @@
+package com.inovatex.planrequest.dao;
+
+public interface PlanRequestDao {
+
+}

@@ -1,0 +1,9 @@
+package com.inovatex.vendor.dao;
+
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+
+public interface VendorDao {
+	Vendor getVendorByVendorId(int vendorID)throws VendorNotFoundExceptions;
+}

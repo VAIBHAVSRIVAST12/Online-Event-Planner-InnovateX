@@ -1,0 +1,7 @@
+package com.inovatex.user.utils;
+
+
+
+public class DBConnection {
+	
+}

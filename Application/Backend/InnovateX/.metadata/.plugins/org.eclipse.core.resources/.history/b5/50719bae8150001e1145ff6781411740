@@ -1,0 +1,153 @@
+package com.inovatex.admin.dao;
+import com.hsbc.codefdury.beans.Users;
+import com.hsbc.codefdury.beans.Vendor;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.hsbc.codefury.dao.AdminDao;
+import com.hsbc.codefury.exceptions.UserNotFoundException;
+import com.hsbc.codefury.exceptions.VendorAlreadyExistsException;
+import com.hsbc.codefury.exceptions.VendorNotFoundException;
+import com.hsbc.codefury.utils.DBConnection;
+import com.hsbc.codefury.exceptions.UserNotFoundException;
+//import com.hsbc.employee.utils.DBConnection;
+
+public class AdminDaoImpl implements AdminDao {
+	
+	Connection conn;
+	PreparedStatement pst;
+	ResultSet rs;
+	
+
+	@Override
+	public int addVendor(Vendor vendor)throws VendorAlreadyExistsException {
+		
+		String addqry = "insert into vendor(VendorName, VendorAddress, VendorEmail, VendorContactNumbers) values(?,?,?,?)";
+		//String search = "select code from vendor where VendorContactNumbers=?";
+		int rows=0;
+		conn = DBConnection.getConnection();
+		try {
+			
+			pst = conn.prepareStatement(addqry);
+	
+			pst.setString(1, vendor.getVendorName());
+			pst.setString(2, vendor.getVendorEmail());
+			pst.setString(3, vendor.getVendorAddress()); 
+			pst.setString(4, vendor.getVendorContactnumbers()); 
+			
+			rows = pst.executeUpdate();
+			
+		}
+		catch (SQLIntegrityConstraintViolationException e) {
+			throw new VendorAlreadyExistsException();
+		}
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		DBConnection.close();
+		
+		return rows;
+	}
+
+	@Override
+	public List<Vendor> viewVendors() throws VendorNotFoundException {
+		String selectqry = "select * from vendor";
+		List<Vendor> vendorList = new ArrayList<>();
+		conn = DBConnection.getConnection();
+		try {
+			pst = conn.prepareStatement(selectqry);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				Vendor vndr = new Vendor();
+				vndr.setVendorId(rs.getInt(1));
+				vndr.setVendorName(rs.getString(2));
+				vndr.setVendorAddress(rs.getString(3));
+				vndr.setVendorEmail(rs.getString(4));
+				vndr.setVendorContactnumbers(rs.getString(5));
+				vendorList.add(vndr);
+			}
+return vendorList;
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+		throw new VendorNotFoundException();
+		
+	}
+
+	@Override
+	public List<Users> viewUsers() throws UserNotFoundException {
+		
+		String selectquery="select * from user";
+		List<Users> userList = new ArrayList<>();
+		conn=DBConnection.getConnection();
+		try {
+			pst=conn.prepareStatement(selectquery);
+		    rs=pst.executeQuery();
+			while(rs.next())
+			{			
+				Users user = new Users();
+				 user.setUserId(rs.getInt("userId"));
+                user.setUserFullName(rs.getString("userfullName"));
+                user.setUsername(rs.getString("username"));
+                user.setUserPassword(rs.getString("userpassword"));
+                LocalDate doj = LocalDate.parse(rs.getDate("userdateOfJoining").toString(),DateTimeFormatter.ISO_DATE);
+                user.setUserDateOfJoining(doj);
+                LocalDate dob = LocalDate.parse(rs.getDate("userdateOfBirth").toString(),DateTimeFormatter.ISO_DATE);
+                user.setUserDateOfBirth(dob);
+                user.setUserDepartment(rs.getString("userdepartment"));
+                user.setUserMobile(rs.getString("usermobile"));
+                user.setUserEmail(rs.getString("useremail"));
+                user.setUserLocation(rs.getString("userlocation"));
+                user.setUserStatus(rs.getString("userstatus"));
+                user.setQuotationSelectedId(rs.getInt("quotationSelectedId"));
+                userList.add(user);
+			}
+			return userList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBConnection.close();
+		throw new UserNotFoundException();
+		
+	}
+
+	@Override
+	public String activateDeactivate(int userid) {
+		// TODO Auto-generated method stub
+		String deletequery="delete * from user where userId=?";
+		conn = DBConnection.getConnection();
+		
+			
+			
+			try {
+				pst = conn.prepareStatement(deletequery);
+				Users usr=new Users();
+				pst.setInt(1, userid);
+				//rs=pst.executeQuery();
+				
+				int rowss=pst.executeUpdate();
+				return "Deactivated";
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+		
+		return null;
+	}
+	
+
+}

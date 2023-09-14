@@ -1,0 +1,14 @@
+package com.inovatex.planrequest.dao;
+
+import java.util.List;
+
+import com.inovatex.planrequest.beans.PlanRequest;
+import com.inovatex.planrequest.exceptions.PlanRequestNotFoundExceptions;
+import com.inovatex.user.beans.User;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+
+public interface PlanRequestDao {
+	int addPlanRequest(PlanRequest planRequest, int userId);
+	int deletePlanRequest (String requestId)throws PlanRequestNotFoundExceptions;
+	List<PlanRequest> allRequest()throws PlanRequestNotFoundExceptions;
+}

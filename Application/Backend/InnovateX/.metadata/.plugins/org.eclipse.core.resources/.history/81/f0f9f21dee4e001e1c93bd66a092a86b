@@ -1,0 +1,18 @@
+package com.inovatex.user.beans;
+
+import java.time.LocalDate;
+
+public class User {
+	private int userId;
+    private String userFullName;
+    private String username;
+    private String userPassword;
+    private LocalDate userDateOfJoining;
+    private LocalDate userDateOfBirth;
+    private String userDepartment;
+    private String userMobile;
+    private String userEmail;
+    private String userLocation;
+    private String userStatus;
+    private int quotationSelectedId;
+}

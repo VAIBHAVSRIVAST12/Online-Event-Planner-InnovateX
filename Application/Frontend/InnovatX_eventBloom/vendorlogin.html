@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/VendorLogin.css" />
+    <title>Vendor Login</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function validateform1()
+      {
+        var username2=document.f2.username.value;
+        var password2=document.f2.password.value;
+        if(username2!="Ravi" && password2!="223456789")
+        {
+          alert("Wrong credentials")
+          return false;
+        }
+        
+      }
+      </script>
+    <body>
+      <div class="login-page">
+        <div class="form">
+          <div class="login">
+            <div class="login-header">
+              <h1>LOGIN</h1>
+              <p>Please enter your credentials to login.</p>
+            </div>
+          </div>
+          <form class="login-form" name="f2" action="vendorHomePage.html"onsubmit="return validateform1()">
+            <input type="text" name="username" placeholder="Vendor Name" required />
+            <input type="password" name="password" placeholder="password" required />
+            <input type="submit" id="CI" type ="Log in" placeholder="LOGIN">
+           
+          </form>
+        </div>
+      </div>
+    </body>
+  </body>
+</html>

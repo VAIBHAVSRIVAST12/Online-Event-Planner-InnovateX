@@ -1,0 +1,62 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #d1e9eb;
+}
+
+#userinterface {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #8ed3db;
+  border-radius: 10px;
+}
+
+#registrationForm {
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #8ed3db;
+}
+h1 {
+  text-align: center;
+}
+button {
+  background-color: #0074d9;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#address {
+  height: 100px;
+  width: 300px;
+}
+
+#successMessage {
+  color: green;
+}

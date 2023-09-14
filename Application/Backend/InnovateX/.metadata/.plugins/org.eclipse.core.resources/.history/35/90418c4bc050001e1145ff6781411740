@@ -1,0 +1,5 @@
+package com.inovatex.vendor.dao;
+
+public class VendorDaoImpl {
+
+}

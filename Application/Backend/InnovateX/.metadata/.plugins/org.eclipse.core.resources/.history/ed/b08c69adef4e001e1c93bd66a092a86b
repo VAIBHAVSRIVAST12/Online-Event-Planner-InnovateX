@@ -1,0 +1,13 @@
+package com.inovatex.user.dao;
+
+import java.util.List;
+
+
+
+public interface UserDao {
+	int addUser user(c user) throws EmployeeAlreadyExistsException;
+	int updateUser user(User user)throws EmployeeNotFoundExceptions;
+	int deleteUser user(String username)throws EmployeeNotFoundExceptions;
+	User getUserByUsername(String username);
+	List<User user> allUser();
+}

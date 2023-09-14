@@ -1,0 +1,92 @@
+package com.inovatex.planrequest.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.inovatex.planrequest.beans.PlanRequest;
+import com.inovatex.planrequest.exceptions.PlanRequestNotFoundExceptions;
+import com.inovatex.user.beans.User;
+import com.inovatex.utils.DBConnections;
+
+public class PlanRequestDaoImpl implements PlanRequestDao {
+	Connection conn;
+	PreparedStatement preparedStatement;
+	ResultSet resultSet;
+	@Override
+	public int addPlanRequest(PlanRequest planRequest, int userId) {
+		conn = DBConnections.getConnection();
+		int rows=0;String insertsql = "INSERT INTO planrequest ( UserID,RequestFromDate, RequestToDate, RequestServices, RequestNumberOfPersons, requestOtherService) SELECT u.UserID, ?,?,?,?,? FROM User u WHERE u.username = ?";
+		try {
+			preparedStatement = conn.prepareStatement(insertsql);
+			preparedStatement.setString(1, planRequest.getRequestFromDate().toString());
+            preparedStatement.setString(2, planRequest.getRequestToDate().toString());
+            preparedStatement.setString(3, planRequest.getRequestServicesNeeded()); 
+            preparedStatement.setInt(4, planRequest.getRequestNumberOfPersons());  
+            preparedStatement.setString(5, planRequest.getRequestOtherServices());
+            preparedStatement.setString(6,"karan2001");
+			rows = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+        	e.printStackTrace();
+        }
+		DBConnections.close();
+		return rows;
+	}
+
+	@Override
+	public int deletePlanRequest(int  requestId) throws PlanRequestNotFoundExceptions {
+		int rows=0;
+		conn = DBConnections.getConnection();
+		String deleteQuery="delete from  planrequest where reuqestId=?";
+		try {
+			preparedStatement=conn.prepareStatement(deleteQuery);
+			
+			preparedStatement.setInt(1, requestId);
+			rows=preparedStatement.executeUpdate();
+			return rows;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		DBConnections.close();
+		throw new PlanRequestNotFoundExceptions();
+	}
+
+	@Override
+	public List<PlanRequest> allRequest() throws PlanRequestNotFoundExceptions {
+		String selectquery="select * from planrequest";
+		List<PlanRequest> planRequestList = new ArrayList<>();
+		conn=DBConnections.getConnection();
+		try {
+			preparedStatement=conn.prepareStatement(selectquery);
+			resultSet=preparedStatement.executeQuery();
+			while(resultSet.next())
+			{			
+				User user = new User();
+				PlanRequest planRequest= new PlanRequest();
+				planRequest.setRequestId(resultSet.getInt("RequestID"));
+				planRequest.setRequestServicesNeeded(resultSet.getString("RequestServices"));
+                LocalDate fromDate = LocalDate.parse(resultSet.getDate("RequestFromDate").toString(),DateTimeFormatter.ISO_DATE);
+                planRequest.setRequestFromDate(fromDate);
+                user.setUserDateOfJoining(fromDate);
+                LocalDate toDate = LocalDate.parse(resultSet.getDate("RequestToDate").toString(),DateTimeFormatter.ISO_DATE);
+                planRequest.setRequestToDate(toDate);
+                planRequest.setRequestNumberOfPersons(resultSet.getInt("RequestNumberOfPersons"));
+                planRequest.setUserId(resultSet.getInt("UserID"));
+                planRequestList.add(planRequest);
+			}
+			return planRequestList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBConnections.close();
+		throw new PlanRequestNotFoundExceptions();
+	}
+
+}

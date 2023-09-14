@@ -1,0 +1,17 @@
+package com.inovatex.user.dao;
+
+import java.util.List;
+
+import com.hsbc.employee.exceptions.UserAlreadyExistsException;
+import com.hsbc.employee.exceptions.UserNotFoundExceptions;
+import com.inovatex.user.beans.User;
+
+
+
+public interface UserDao {
+	int addUser (User user) throws UserAlreadyExistsException;
+	int updateUser (User user)throws UserNotFoundExceptions;
+	int deleteUser (String username)throws UserNotFoundExceptions;
+	User getUserByUsername(String username);
+	List<User> allUser();
+}

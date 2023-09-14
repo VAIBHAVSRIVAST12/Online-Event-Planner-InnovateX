@@ -1,0 +1,9 @@
+package com.inovatex.vendor.exceptions;
+
+@SuppressWarnings("serial")
+public class VendorNotFoundExceptions extends Exception {
+	public VendorNotFoundExceptions() {
+		super("Vendor not found in database..");
+	}
+
+}

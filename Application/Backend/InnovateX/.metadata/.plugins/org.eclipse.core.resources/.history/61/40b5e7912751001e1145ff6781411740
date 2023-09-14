@@ -1,0 +1,5 @@
+package com.inovatex.vendor.beans;
+
+public class ServiceList {
+
+}

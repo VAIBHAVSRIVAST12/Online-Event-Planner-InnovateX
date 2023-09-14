@@ -1,0 +1,143 @@
+package com.inovatex.vendor.service;
+
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.AdminWrongPasswordException;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.user.beans.PlanRequest;
+import com.inovatex.user.exceptions.PlanRequestNotFoundExceptions;
+import com.inovatex.user.exceptions.UserNotFoundExceptions;
+import com.inovatex.vendor.beans.Packages;
+import com.inovatex.vendor.beans.Quotation;
+import com.inovatex.vendor.dao.VendorDao;
+import com.inovatex.vendor.dao.VendorDaoImpl;
+import com.inovatex.vendor.exceptions.PackageAlreadyExistsException;
+import com.inovatex.vendor.exceptions.PackageNotFoundExceptions;
+import com.inovatex.vendor.exceptions.QuotationAlreadyExistsException;
+import com.inovatex.vendor.exceptions.QuotationNotFoundExceptions;
+import com.inovatex.vendor.exceptions.VendorWrongPasswordException;
+
+public class VendorServiceImpl implements VendorService{
+	VendorDao vendorDao = new VendorDaoImpl();
+	@Override
+	public Vendor getVendorByVendorId(int vendorID) throws VendorNotFoundException {
+		
+		return vendorDao.getVendorByVendorId(vendorID);
+	}
+
+	@Override
+	public boolean validateVendor(int vendorId, String vendorPassword)
+			throws VendorNotFoundException, VendorWrongPasswordException {
+		try {
+			Vendor vendor = getVendorByVendorId(vendorId);
+			if(vendor.getVendorPassword().equals(vendorPassword)) {
+				return true;
+			}
+			else {
+				throw new VendorWrongPasswordException();
+			}
+		} catch (VendorNotFoundException e) {
+			throw new VendorNotFoundException();
+		}
+
+	}
+
+	@Override
+	public int addPackage(Packages packages) throws PackageAlreadyExistsException {
+		
+		return vendorDao.addPackage(packages);
+	}
+
+	@Override
+	public List<PlanRequest> allRequest() throws PlanRequestNotFoundExceptions {
+		
+		return vendorDao.allRequest();
+	}
+
+	@Override
+	public int changePassword(int vendorId, String password) throws VendorNotFoundException {
+		
+		return vendorDao.changePassword(vendorId, password);
+	}
+
+	@Override
+	public int createQuoation(Quotation quotation) throws QuotationAlreadyExistsException {
+		
+		return vendorDao.createQuoation(quotation);
+	}
+
+	@Override
+	public double calculatingAmount(int vendorId, String packageType, int planRequestId) throws PlanRequestNotFoundExceptions {
+		PlanRequest planRequest = getPlanRequest(planRequestId);
+		Packages packages;
+		try {
+			packages = getPackage(vendorId,packageType);
+		} catch (PackageNotFoundExceptions e) {
+			throw new  PlanRequestNotFoundExceptions();
+		}
+		long noOfDays = ChronoUnit.DAYS.between(planRequest.getRequestFromDate(), planRequest.getRequestToDate());
+		int noOfPerson= planRequest.getRequestNumberOfPersons();
+		double decorationAmount = packages.getDecoration();
+		double photographyAmount = packages.getPhotography();
+		double catering_vegAmount = packages.getCatering_veg();
+		double catering_nonvegAmount = packages.getCatering_nonveg();
+		double totalAmount = (decorationAmount+photographyAmount)*noOfDays+(catering_vegAmount+catering_nonvegAmount)*(noOfPerson/2);
+		return totalAmount;
+	}
+
+	@Override
+	public PlanRequest getPlanRequest(int requestId) throws PlanRequestNotFoundExceptions {
+		
+		return vendorDao.getPlanRequest(requestId);
+	}
+
+	@Override
+	public Packages getPackage(int vendorId, String packageType) throws PackageNotFoundExceptions {
+		return vendorDao.getPackage(vendorId, packageType);
+	}
+
+	@Override
+	public int getUserIdByPlanRequestId(int planRequestId) throws UserNotFoundExceptions {
+		return vendorDao.getUserIdByPlanRequestId(planRequestId);
+	}
+
+	@Override
+	public List<Quotation> viewQuotation(int userId) throws QuotationNotFoundExceptions {
+		
+		return vendorDao.viewQuotation(userId);
+	}
+
+	@Override
+	public Quotation getQuotationByQuotationId(int quotationId) throws QuotationNotFoundExceptions {
+		
+		return vendorDao.getQuotationByQuotationId(quotationId);
+	}
+
+	@Override
+	public int selectQuotation(int quotationId, String QuotationStatus) throws QuotationNotFoundExceptions {
+		
+		return vendorDao.selectQuotation(quotationId, QuotationStatus);
+	}
+
+	@Override
+	public int setSelectQuotationId(String username, int quotationId) throws UserNotFoundExceptions {
+		
+		return vendorDao.setSelectQuotationId(username, quotationId);
+	}
+
+	@Override
+	public List<Packages> viewPackages(int vendorId) throws PackageNotFoundExceptions {
+		return vendorDao.viewPackages(vendorId);
+	}
+
+	@Override
+	public List<Quotation> viewQuotationForVendor(int vendorId) throws QuotationNotFoundExceptions {
+		
+		return vendorDao.viewQuotationForVendor(vendorId);
+	}
+
+}

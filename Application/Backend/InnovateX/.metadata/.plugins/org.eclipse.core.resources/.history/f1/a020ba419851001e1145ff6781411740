@@ -1,0 +1,8 @@
+package com.inovatex.vendor.exceptions;
+
+@SuppressWarnings("serial")
+public class QuotationAlreadyExistsException2 extends Exception{
+	public QuotationAlreadyExistsException2() {
+		super("Package already exists...");
+	}
+}

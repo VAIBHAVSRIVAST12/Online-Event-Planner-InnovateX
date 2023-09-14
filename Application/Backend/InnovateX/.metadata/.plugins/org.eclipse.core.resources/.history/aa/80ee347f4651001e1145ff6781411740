@@ -1,0 +1,72 @@
+package com.inovatex.vendor.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
+import com.inovatex.admin.beans.Admin;
+import com.inovatex.admin.beans.Vendor;
+import com.inovatex.admin.exceptions.AdminNotFoundExceptions;
+import com.inovatex.admin.exceptions.VendorAlreadyExistsException;
+import com.inovatex.admin.exceptions.VendorNotFoundException;
+import com.inovatex.utils.DBConnections;
+import com.inovatex.vendor.beans.Packages;
+import com.inovatex.vendor.exceptions.PackageAlreadyExistsException;
+
+public class VendorDaoImpl implements VendorDao{
+	Connection conn;
+	PreparedStatement preparedStatement;
+	ResultSet resultSet;
+	@Override
+	public Vendor getVendorByVendorId(int vendorID) throws VendorNotFoundException {
+		conn = DBConnections.getConnection();
+		String selectquery="select * from vendor where vendorid=?";
+		try {
+			preparedStatement=conn.prepareStatement(selectquery);
+			preparedStatement.setInt(1, vendorID);
+			resultSet=preparedStatement.executeQuery();
+			if(resultSet.next())
+			{	
+				Vendor vendor = new Vendor();
+				vendor.setVendorId(resultSet.getInt("VendorID"));
+				vendor.setVendorName(resultSet.getString("VendorName"));
+				vendor.setVendorAddress(resultSet.getString("VendorAddress"));
+				vendor.setVendorEmail(resultSet.getString("VendorEmail"));
+				vendor.setVendorContactnumbers(resultSet.getString("VendorContactNumbers"));
+				vendor.setVendorPassword(resultSet.getString("vendorpassword"));
+				return vendor;
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBConnections.close();
+		throw new VendorNotFoundException();
+	
+	}
+	@Override
+	public int addPackage(Packages package) throws PackageAlreadyExistsException {
+		conn = DBConnections.getConnection();
+		int rows=0;
+		String insertsql = "INSERT INTO package ( TypeOfEvent, PackageType,VendorID,Decoration,photography,catering_veg,catering_nonveg,otherservice) VALUES ( ?,?,?,?,?,?,?,?)";
+		try {
+			preparedStatement = conn.prepareStatement(insertsql);
+            preparedStatement.setString(1, p.getTypeOfEvent());
+            preparedStatement.setString(2, p.getPackageType()); 
+            preparedStatement.setInt(3, p.getVendorID());
+            preparedStatement.setInt(4, p.getServiceID());
+			rows = preparedStatement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+			throw new PackageAlreadyExistsException();
+        }        
+			catch (SQLException e) {
+        	e.printStackTrace();
+        }
+		DBConnections.close();
+		return rows;
+		
+	}
+
+}

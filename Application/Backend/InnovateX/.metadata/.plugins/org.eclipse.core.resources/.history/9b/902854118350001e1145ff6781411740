@@ -1,0 +1,9 @@
+package com.inovatex.user.exceptions;
+
+@SuppressWarnings("serial")
+public class AdminWrongPasswordException2 extends Exception{
+	public AdminWrongPasswordException2() {
+		super("User Password not match...");
+	}
+
+}

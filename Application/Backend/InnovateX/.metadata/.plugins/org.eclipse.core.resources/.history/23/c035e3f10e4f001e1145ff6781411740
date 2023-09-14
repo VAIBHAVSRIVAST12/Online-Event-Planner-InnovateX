@@ -1,0 +1,20 @@
+package com.inovatex.user.ui;
+
+import java.util.Scanner;
+
+import com.hsbc.employee.service.EmployeeService;
+import com.hsbc.employee.service.impl.EmployeeServiceImpl;
+import com.inovatex.user.service.UserService;
+import com.inovatex.user.service.UserServiceImpl;
+
+public class UIApplication {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		UserService userService = new UserServiceImpl();
+		int choice=0;
+		while(choice!=6) {
+
+	}
+
+}
